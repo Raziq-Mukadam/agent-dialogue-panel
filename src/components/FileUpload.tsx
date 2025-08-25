@@ -12,7 +12,7 @@ interface UploadedFile {
   progress: number;
 }
 
-const FILE_WEBHOOK_URL = 'https://influenceragent.app.n8n.cloud/webhook-test/05695b56-dc5f-4b6c-9a6d-e5b5cceb27fe';
+const FILE_WEBHOOK_URL = 'https://influenceragent.app.n8n.cloud/webhook/05695b56-dc5f-4b6c-9a6d-e5b5cceb27fe';
 
 export const FileUpload: React.FC = () => {
   const [files, setFiles] = useState<UploadedFile[]>([]);

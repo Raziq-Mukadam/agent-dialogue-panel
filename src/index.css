@@ -2,66 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Chatbot UI Design System - Professional gradient theme */
+/* Chatbot UI Design System - Modern Dark Purple Theme */
 
 @layer base {
   :root {
     /* Main Background */
-    --background: #f8fafc;
-    --foreground: #1e293b;
+    --background: hsl(248, 24%, 6%);
+    --foreground: hsl(0, 0%, 98%);
     
     /* Chat Colors */
-    --chat-bg: #ffffff;
-    --user-bubble: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    --bot-bubble: #f1f5f9;
-    --user-text: #ffffff;
-    --bot-text: #334155;
+    --chat-bg: hsl(248, 20%, 8%);
+    --user-bubble: linear-gradient(135deg, hsl(270, 75%, 65%), hsl(285, 85%, 55%));
+    --bot-bubble: hsl(240, 15%, 12%);
+    --user-text: hsl(0, 0%, 100%);
+    --bot-text: hsl(210, 20%, 90%);
     
     /* File Panel */
-    --panel-bg: #f8fafc;
-    --panel-border: #e2e8f0;
-    --upload-zone: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-    --upload-border: #0ea5e9;
+    --panel-bg: hsl(248, 20%, 8%);
+    --panel-border: hsl(240, 15%, 15%);
+    --upload-zone: linear-gradient(135deg, hsl(270, 30%, 10%), hsl(285, 25%, 12%));
+    --upload-border: hsl(270, 75%, 65%);
     
     /* UI Elements */
-    --input-bg: #ffffff;
-    --input-border: #e2e8f0;
-    --input-focus: #3b82f6;
-    --button-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    --button-hover: linear-gradient(135deg, #1d4ed8, #1e40af);
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --input-bg: hsl(240, 15%, 12%);
+    --input-border: hsl(240, 15%, 20%);
+    --input-focus: hsl(270, 75%, 65%);
+    --button-primary: linear-gradient(135deg, hsl(270, 75%, 65%), hsl(285, 85%, 55%));
+    --button-hover: linear-gradient(135deg, hsl(285, 85%, 55%), hsl(300, 90%, 50%));
+    --shadow: 0 4px 16px -4px hsla(270, 75%, 65%, 0.3);
+    --shadow-lg: 0 20px 25px -5px hsla(270, 75%, 65%, 0.2);
     
     /* Status Colors */
-    --success: #10b981;
-    --warning: #f59e0b;
-    --error: #ef4444;
-    --loading: #6366f1;
+    --success: hsl(142, 76%, 36%);
+    --warning: hsl(38, 92%, 50%);
+    --error: hsl(0, 84%, 60%);
+    --loading: hsl(270, 75%, 65%);
+    
+    /* Glow Effects */
+    --glow-primary: 0 0 20px hsla(270, 75%, 65%, 0.5);
+    --glow-secondary: 0 0 30px hsla(285, 85%, 55%, 0.3);
     
     /* Animations */
-    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 }
 
 /* Custom Components */
 .gradient-bg {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f8fafc 100%);
+  background: linear-gradient(135deg, hsl(248, 30%, 4%) 0%, hsl(260, 35%, 6%) 50%, hsl(270, 25%, 8%) 100%);
 }
 
 .chat-container {
   background: var(--chat-bg);
   box-shadow: var(--shadow-lg);
   border-radius: var(--radius);
+  border: 1px solid var(--panel-border);
 }
 
 .user-message {
   background: var(--user-bubble);
   color: var(--user-text);
   border-radius: 1.5rem 1.5rem 0.5rem 1.5rem;
-  box-shadow: var(--shadow);
+  box-shadow: var(--glow-primary);
+  position: relative;
+}
+
+.user-message::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: var(--user-bubble);
+  border-radius: inherit;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.3;
 }
 
 .bot-message {
@@ -69,6 +86,7 @@
   color: var(--bot-text);
   border-radius: 1.5rem 1.5rem 1.5rem 0.5rem;
   border: 1px solid var(--input-border);
+  backdrop-filter: blur(10px);
 }
 
 .upload-zone {
@@ -76,22 +94,53 @@
   border: 2px dashed var(--upload-border);
   border-radius: var(--radius);
   transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 30%, hsla(270, 75%, 65%, 0.1) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.upload-zone:hover::before {
+  transform: translateX(100%);
 }
 
 .upload-zone:hover {
   border-color: var(--input-focus);
   transform: translateY(-2px);
+  box-shadow: var(--glow-primary);
 }
 
 .send-button {
   background: var(--button-primary);
   transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.send-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 30%, hsla(285, 85%, 55%, 0.3) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.send-button:hover::before {
+  transform: translateX(100%);
 }
 
 .send-button:hover {
   background: var(--button-hover);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--glow-secondary);
 }
 
 .typing-indicator {

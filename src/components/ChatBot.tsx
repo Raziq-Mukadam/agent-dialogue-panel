@@ -12,7 +12,7 @@ interface Message {
   timestamp: Date;
 }
 
-const WEBHOOK_URL = 'https://influenceragent.app.n8n.cloud/webhook-test/28b99ea7-8adb-459b-b73b-aa00311af56b';
+const WEBHOOK_URL = 'https://influenceragent.app.n8n.cloud/webhook/28b99ea7-8adb-459b-b73b-aa00311af56b';
 
 export const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -75,7 +75,7 @@ export const ChatBot: React.FC = () => {
       
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: data.response || data.message || 'I received your message, but I don\'t have a response right now.',
+        content: (data.response || data.message || 'I received your message, but I don\'t have a response right now.').replace(/\\n/g, '\n'),
         sender: 'bot',
         timestamp: new Date(),
       };
@@ -147,7 +147,7 @@ export const ChatBot: React.FC = () => {
                 <div
                   className={`px-4 py-2 ${message.sender === 'user' ? 'user-message' : 'bot-message'}`}
                 >
-                  <p className="text-sm leading-relaxed">{message.content}</p>
+                  <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                   <p className="text-xs opacity-60 mt-1">
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
