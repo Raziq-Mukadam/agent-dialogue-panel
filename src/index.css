@@ -6,26 +6,43 @@
 
 @layer base {
   :root {
-    /* Main Background */
-    --background: hsl(248, 24%, 6%);
-    --foreground: hsl(0, 0%, 98%);
+    /* Base colors for shadcn components */
+    --background: 248 24% 6%;
+    --foreground: 0 0% 98%;
+    --card: 248 20% 8%;
+    --card-foreground: 0 0% 95%;
+    --popover: 248 20% 8%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 270 75% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 15% 12%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 240 15% 15%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 270 30% 20%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 15% 20%;
+    --input: 240 15% 12%;
+    --ring: 270 75% 65%;
     
-    /* Chat Colors */
+    /* Custom theme colors */
     --chat-bg: hsl(248, 20%, 8%);
     --user-bubble: linear-gradient(135deg, hsl(270, 75%, 65%), hsl(285, 85%, 55%));
-    --bot-bubble: hsl(240, 15%, 12%);
+    --bot-bubble: hsl(240, 15%, 15%);
     --user-text: hsl(0, 0%, 100%);
-    --bot-text: hsl(210, 20%, 90%);
+    --bot-text: hsl(0, 0%, 95%);
     
     /* File Panel */
     --panel-bg: hsl(248, 20%, 8%);
-    --panel-border: hsl(240, 15%, 15%);
-    --upload-zone: linear-gradient(135deg, hsl(270, 30%, 10%), hsl(285, 25%, 12%));
+    --panel-border: hsl(240, 15%, 20%);
+    --upload-zone: linear-gradient(135deg, hsl(270, 30%, 12%), hsl(285, 25%, 15%));
     --upload-border: hsl(270, 75%, 65%);
     
     /* UI Elements */
-    --input-bg: hsl(240, 15%, 12%);
-    --input-border: hsl(240, 15%, 20%);
+    --input-bg: hsl(240, 15%, 15%);
+    --input-border: hsl(240, 15%, 25%);
     --input-focus: hsl(270, 75%, 65%);
     --button-primary: linear-gradient(135deg, hsl(270, 75%, 65%), hsl(285, 85%, 55%));
     --button-hover: linear-gradient(135deg, hsl(285, 85%, 55%), hsl(300, 90%, 50%));
@@ -33,10 +50,15 @@
     --shadow-lg: 0 20px 25px -5px hsla(270, 75%, 65%, 0.2);
     
     /* Status Colors */
-    --success: hsl(142, 76%, 36%);
+    --success: hsl(142, 76%, 50%);
     --warning: hsl(38, 92%, 50%);
     --error: hsl(0, 84%, 60%);
     --loading: hsl(270, 75%, 65%);
+    
+    /* Text Colors */
+    --text-primary: hsl(0, 0%, 98%);
+    --text-secondary: hsl(0, 0%, 85%);
+    --text-muted: hsl(0, 0%, 70%);
     
     /* Glow Effects */
     --glow-primary: 0 0 20px hsla(270, 75%, 65%, 0.5);
@@ -178,5 +200,31 @@
 
   body {
     @apply bg-background text-foreground;
+    color: var(--text-primary);
+  }
+  
+  /* Ensure all text elements have proper contrast */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+  }
+  
+  p, span, div {
+    color: inherit;
+  }
+  
+  /* Input styling */
+  input, textarea {
+    background: var(--input-bg) !important;
+    border-color: var(--input-border) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: var(--text-muted) !important;
+  }
+  
+  /* Button text visibility */
+  button {
+    color: var(--text-primary);
   }
 }
